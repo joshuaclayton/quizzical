@@ -4,43 +4,60 @@ import Html exposing (..)
 import Html.Attributes exposing (class, type', placeholder, value, id, for)
 
 
+type alias Question =
+  { difficulty : Int
+  , category : String
+  , text : String
+  , answer : String
+  }
+
+
+initialQuestion : Question
+initialQuestion =
+  { difficulty = 600
+  , category = "Oscar songs in difficult words"
+  , text = "1997:A personal cardiac organ shall endure"
+  , answer = "My Heart Will Go On"
+  }
+
+
 main : Html
 main =
-  view
+  view initialQuestion
 
 
-view : Html
-view =
+view : Question -> Html
+view question =
   div
     [ class "container" ]
     [ header [] [ h1 [] [ text "Questions" ] ]
     , section
         []
-        [ questionMetadata
-        , questionHeader
-        , questionSubmissionForm
+        [ questionMetadata question
+        , questionHeader question
+        , questionSubmissionForm question
         ]
     ]
 
 
-questionMetadata : Html
-questionMetadata =
+questionMetadata : Question -> Html
+questionMetadata question =
   dl
     []
     [ dt [] [ text "Category" ]
-    , dd [] [ text "Oscar songs in difficult words" ]
+    , dd [] [ text question.category ]
     , dt [] [ text "Difficulty" ]
-    , dd [] [ text "600" ]
+    , dd [] [ (text << toString) question.difficulty ]
     ]
 
 
-questionHeader : Html
-questionHeader =
-  h2 [] [ text "1997:A personal cardiac organ shall endure" ]
+questionHeader : Question -> Html
+questionHeader question =
+  h2 [] [ text question.text ]
 
 
-questionSubmissionForm : Html
-questionSubmissionForm =
+questionSubmissionForm : Question -> Html
+questionSubmissionForm question =
   form
     []
     [ label [ for "answer" ] [ text "What do you think?" ]
