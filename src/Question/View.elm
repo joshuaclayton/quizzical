@@ -10,16 +10,12 @@ import Util.CustomEvent exposing (onSubmit)
 
 view : Signal.Address Action -> Model -> Html
 view address question =
-  div
-    [ class "container" ]
-    [ header [] [ h1 [] [ text "Questions" ] ]
-    , section
-        []
-        [ questionMetadata question
-        , questionHeader question
-        , answerStatus question
-        , questionSubmissionForm address question
-        ]
+  section
+    []
+    [ questionMetadata question
+    , questionHeader question
+    , answerStatus question
+    , questionSubmissionForm address question
     ]
 
 

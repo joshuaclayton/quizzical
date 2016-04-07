@@ -3,8 +3,8 @@ module Main (..) where
 import StartApp
 import Task exposing (Task)
 import Effects exposing (Effects)
-import Question.View exposing (view)
-import Question.Update exposing (init, update)
+import App.View exposing (view)
+import App.Update exposing (init, update)
 
 
 main =

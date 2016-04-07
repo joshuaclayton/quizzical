@@ -1,18 +1,13 @@
-module Question.Update (Action(..), init, update) where
+module Question.Update (Action(..), update) where
 
 import Effects exposing (Effects)
-import Question.Model exposing (AnswerStatus(..), Model, initialModel)
+import Question.Model exposing (AnswerStatus(..), Model)
 
 
 type Action
   = NoOp
   | UpdateResponse String
   | Submit
-
-
-init : ( Model, Effects Action )
-init =
-  ( initialModel, Effects.none )
 
 
 update : Action -> Model -> ( Model, Effects Action )
