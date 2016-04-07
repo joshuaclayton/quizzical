@@ -3,10 +3,11 @@ module Question.View (view) where
 import Html exposing (..)
 import Html.Attributes exposing (class, type', placeholder, value, id, for)
 import Question.Model exposing (Model)
+import Question.Update exposing (Action)
 
 
-view : Model -> Html
-view question =
+view : Signal.Address Action -> Model -> Html
+view address question =
   div
     [ class "container" ]
     [ header [] [ h1 [] [ text "Questions" ] ]
