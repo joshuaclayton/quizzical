@@ -3,7 +3,8 @@ module Question.View (view) where
 import Html exposing (..)
 import Html.Attributes exposing (class, type', placeholder, value, id, for)
 import Question.Model exposing (Model, AnswerStatus(..))
-import Question.Update exposing (Action)
+import Question.Update exposing (Action(..))
+import Util.CustomEvent exposing (onSubmit)
 
 
 view : Signal.Address Action -> Model -> Html
@@ -16,7 +17,7 @@ view address question =
         [ questionMetadata question
         , questionHeader question
         , answerStatus question
-        , questionSubmissionForm question
+        , questionSubmissionForm address question
         ]
     ]
 
@@ -50,10 +51,10 @@ answerStatus model =
       text <| "'" ++ answer ++ "' is not correct; too bad!"
 
 
-questionSubmissionForm : Model -> Html
-questionSubmissionForm question =
+questionSubmissionForm : Signal.Address Action -> Model -> Html
+questionSubmissionForm address question =
   form
-    []
+    [ onSubmit address Submit ]
     [ label [ for "answer" ] [ text "What do you think?" ]
     , input [ type' "text", placeholder "Enter your answer", id "answer" ] []
     , input [ type' "submit", value "Submit" ] []
