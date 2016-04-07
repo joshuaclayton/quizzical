@@ -13,6 +13,7 @@ type alias Model =
   , text : String
   , answer : String
   , status : AnswerStatus
+  , response : String
   }
 
 
@@ -23,4 +24,5 @@ initialModel =
   , text = "1997:A personal cardiac organ shall endure"
   , answer = "My Heart Will Go On"
   , status = NotAnswered
+  , response = ""
   }

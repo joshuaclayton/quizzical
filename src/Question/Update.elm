@@ -6,6 +6,7 @@ import Question.Model exposing (AnswerStatus(..), Model, initialModel)
 
 type Action
   = NoOp
+  | UpdateResponse String
   | Submit
 
 
@@ -20,6 +21,11 @@ update action model =
     NoOp ->
       ( model, Effects.none )
 
+    UpdateResponse response ->
+      ( { model | response = response }
+      , Effects.none
+      )
+
     Submit ->
       ( { model | status = checkAnswerFor model }
       , Effects.none
@@ -28,4 +34,7 @@ update action model =
 
 checkAnswerFor : Model -> AnswerStatus
 checkAnswerFor model =
-  Correct model.answer
+  if model.response == model.answer then
+    Correct model.response
+  else
+    Incorrect model.response
