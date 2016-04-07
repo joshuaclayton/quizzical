@@ -1,4 +1,10 @@
-module Question.Model (Model, initialModel) where
+module Question.Model (AnswerStatus(..), Model, initialModel) where
+
+
+type AnswerStatus
+  = NotAnswered
+  | Correct String
+  | Incorrect String
 
 
 type alias Model =
@@ -6,6 +12,7 @@ type alias Model =
   , category : String
   , text : String
   , answer : String
+  , status : AnswerStatus
   }
 
 
@@ -15,4 +22,5 @@ initialModel =
   , category = "Oscar songs in difficult words"
   , text = "1997:A personal cardiac organ shall endure"
   , answer = "My Heart Will Go On"
+  , status = NotAnswered
   }

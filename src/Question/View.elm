@@ -2,7 +2,7 @@ module Question.View (view) where
 
 import Html exposing (..)
 import Html.Attributes exposing (class, type', placeholder, value, id, for)
-import Question.Model exposing (Model)
+import Question.Model exposing (Model, AnswerStatus(..))
 import Question.Update exposing (Action)
 
 
@@ -15,6 +15,7 @@ view address question =
         []
         [ questionMetadata question
         , questionHeader question
+        , answerStatus question
         , questionSubmissionForm question
         ]
     ]
@@ -34,6 +35,19 @@ questionMetadata question =
 questionHeader : Model -> Html
 questionHeader question =
   h2 [] [ text question.text ]
+
+
+answerStatus : Model -> Html
+answerStatus model =
+  case model.status of
+    NotAnswered ->
+      text "Not answered yet"
+
+    Correct answer ->
+      text <| "'" ++ answer ++ "' is correct!"
+
+    Incorrect answer ->
+      text <| "'" ++ answer ++ "' is not correct; too bad!"
 
 
 questionSubmissionForm : Model -> Html
