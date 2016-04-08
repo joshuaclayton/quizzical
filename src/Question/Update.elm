@@ -22,7 +22,7 @@ update action model =
       )
 
     Submit ->
-      ( { model | status = checkAnswerFor model }
+      ( { model | status = checkAnswerFor model, complete = True }
       , Effects.none
       )
 

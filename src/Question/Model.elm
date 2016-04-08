@@ -14,6 +14,7 @@ type alias Model =
   , answer : String
   , status : AnswerStatus
   , response : String
+  , complete : Bool
   }
 
 
@@ -25,4 +26,5 @@ initialModel =
   , answer = "My Heart Will Go On"
   , status = NotAnswered
   , response = ""
+  , complete = False
   }

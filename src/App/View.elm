@@ -5,6 +5,7 @@ import Html.Attributes exposing (class)
 import App.Update as AU exposing (Action(..))
 import App.Model as AM exposing (Model)
 import Question.View
+import PreviousAnswer.View
 
 
 view : Signal.Address AU.Action -> AM.Model -> Html
@@ -13,4 +14,5 @@ view address model =
     [ class "container" ]
     [ header [] [ h1 [] [ text "Questions" ] ]
     , Question.View.view (Signal.forwardTo address HandleQuestion) model.currentQuestion
+    , PreviousAnswer.View.view model.answeredQuestions
     ]
