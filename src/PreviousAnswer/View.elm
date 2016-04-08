@@ -28,6 +28,9 @@ score answers =
         Correct _ ->
           True
 
+        Close _ ->
+          True
+
         _ ->
           False
 
@@ -55,6 +58,9 @@ answerStatus model =
 
     Correct answer ->
       text <| "'" ++ answer ++ "' is correct!"
+
+    Close answer ->
+      text <| "'" ++ answer ++ "' is really close! (It's '" ++ model.answer ++ "')"
 
     Incorrect answer ->
       text <| "'" ++ answer ++ "' is not correct; it's actually '" ++ model.answer ++ "'. Nice try!"

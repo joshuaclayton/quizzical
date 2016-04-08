@@ -2,6 +2,7 @@ module Question.Update (Action(..), update) where
 
 import Effects exposing (Effects)
 import Question.Model exposing (AnswerStatus(..), Model)
+import TextMatch
 
 
 type Action
@@ -29,7 +30,19 @@ update action model =
 
 checkAnswerFor : Model -> AnswerStatus
 checkAnswerFor model =
-  if model.response == model.answer then
-    Correct model.response
-  else
-    Incorrect model.response
+  let
+    phraseMatch =
+      TextMatch.phraseDistance model.response model.answer < 2
+
+    wordsMatch =
+      TextMatch.wordsDistance model.response model.answer < 5
+  in
+    case ( phraseMatch, wordsMatch ) of
+      ( True, _ ) ->
+        Correct model.response
+
+      ( _, True ) ->
+        Close model.response
+
+      ( _, _ ) ->
+        Incorrect model.response

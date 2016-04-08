@@ -4,6 +4,7 @@ module Question.Model (AnswerStatus(..), Model, initialModel) where
 type AnswerStatus
   = NotAnswered
   | Correct String
+  | Close String
   | Incorrect String
 
 
